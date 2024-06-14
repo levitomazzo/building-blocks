@@ -1,0 +1,20 @@
+package layers
+
+import (
+	"os"
+	"spot/proto-gen/spot_v1"
+)
+
+type Layer{{layerName | trim}} struct{}
+
+func init() {
+	Register("{{layerName | trim}}", &Layer{{layerName | trim }}{})
+}
+
+func (c *Layer{{layerName | trim }}) Exec(input *spot_v1.Input) (*spot_v1.Output, error) {
+	return &spot_v1.Output{
+		Data: &spot_v1.Output_Value{
+			Value: input.GetValue(),
+		},
+	}, nil
+}

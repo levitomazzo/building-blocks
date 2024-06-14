@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Layer",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/src",
+            "env": {
+                "HOST": "0.0.0.0",
+                "PORT": "50051",
+                "REFLECTION": "enable"
+            }
+        }
+    ]
+}

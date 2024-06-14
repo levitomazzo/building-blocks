@@ -1,0 +1,24 @@
+
+#####################################################################################################################
+#                                                                                                                   #
+#       SSSSS    PPPPPPP    OOOO      TTTTTTTT                                                                      #
+#      SS   SS   PP   PP  OO    OO       TT                                                                         #
+#      SS        PPPPPP   OO    OO       TT                                                                         #
+#       SSSSS    PP       OO    OO       TT                                                                         #
+#           SS   PP       OO    OO       TT                                                                         #
+#      SS   SS   PP       OO    OO       TT                                                                         #
+#       SSSSS    PP         OOOO         TT                                                                         #
+#                                                                                                                   #
+#####################################################################################################################
+# Files and folders that are part of the Spot plugin and should be ignored during the publication of Layers plugins.#
+/layers/layers.go                                                                                                   #
+/layers/README.mo                                                                                                   #
+/proto                                                                                                              #
+/proto-gen                                                                                                          #
+/servers/                                                                                                           #
+.clang-format                                                                                                       #
+go.mod                                                                                                              #
+go.sum                                                                                                              #
+main.go                                                                                                             #
+stackspot.yaml                                                                                                      #
+#####################################################################################################################

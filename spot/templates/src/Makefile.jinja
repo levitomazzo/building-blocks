@@ -1,0 +1,49 @@
+
+#####################################################################################################################
+#                                                                                                                   #
+#       SSSSS    PPPPPPP    OOOO      TTTTTTTT                                                                      #
+#      SS   SS   PP   PP  OO    OO       TT                                                                         #
+#      SS        PPPPPP   OO    OO       TT                                                                         #
+#       SSSSS    PP       OO    OO       TT                                                                         #
+#           SS   PP       OO    OO       TT                                                                         #
+#      SS   SS   PP       OO    OO       TT                                                                         #
+#       SSSSS    PP         OOOO         TT                                                                         #
+#                                                                                                                   #
+#####################################################################################################################
+# Guidelines to assist in the development of your Layer plugin.
+# These rules should not be committed with your plugin.
+# Use them solely as a support for the development of your Layer.
+start:
+	PLAYGROUND=enable \
+	HOST=0.0.0.0 \
+	PORT=50051 \
+	REFLECTION=enable \
+	go run .
+
+list-server:
+	grpcurl -plaintext 0.0.0.0:50051 list
+
+health:
+	grpcurl -plaintext 0.0.0.0:50051 grpc.health.v1.Health.Check
+
+list-spot-rpc:
+	grpcurl -plaintext 0.0.0.0:50051 list spot.v1.Spot
+
+list-layers:
+	grpcurl -plaintext 0.0.0.0:50051 spot.v1.Spot.ListLayers
+
+JSON_STRING_FOR_LAYER_JOKENPO='{"layer": "Jokenpo", "value": "{\"myMove\": \"rock\"}"}'
+
+call:
+	grpcurl -plaintext -d $(JSON_STRING_FOR_LAYER_JOKENPO) 0.0.0.0:50051 spot.v1.Spot.Call
+
+
+#####################################################################################################################
+# You can modify these rules to call your Layer {{layerName | trim}}.
+# Make sure you set the name of your Layer in the 'layer' field.
+# The 'value' field is a generic JSON string, you can pass any valid JSON string to this field.
+#####################################################################################################################
+JSON_STRING_FOR_LAYER_{{layerName | trim}}='{"layer": "{{layerName | trim}}", "value": "{\"congratulations\": \"your layer is working\"}"}'
+
+call-{{layerName | trim}}:
+	grpcurl -plaintext -d $(JSON_STRING_FOR_LAYER_{{layerName | trim}}) 0.0.0.0:50051 spot.v1.Spot.Call

@@ -1,0 +1,42 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: spot
+  display-name: spot
+  description: Base block for building layers SpotStack
+  version: 0.0.5
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - golang
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  justification: I believe it will be a great competitive differentiator if Stackspot provides a set of connectivity that can accelerate customer development. This project provides an alternative to sharing functionalities that are commonly shared by libraries or copies of files built for each language.
+  single-use: False
+  repository: https://github.com/stack-spot/building-blocks.git
+  technologies:
+    - golang
+    - gRPC
+  stk-projects-only: false
+  inputs:
+    - label: What is the name of your Layer?
+      type: text
+      name: layerName
+      pattern: "^[A-Z][a-zA-Z0-9_]*$"
+  hooks:
+    - type: run
+      trigger: after-render
+      commands:
+        - mv ./src/layers/layer.jinja ./src/layers/layer{{layerName}}.go
+        - mv ./src/Makefile.jinja ./src/Makefile.{{layerName}}
+    - type: run
+      trigger: after-render
+      commands:
+        - printf '\n\t Thank you for your valuable contribution to the construction of the layers \n
+          \n\t To ensure everything is functioning correctly, please complete the 2 steps. \n\n
+          \n\t STEP 1 Start aplication \n
+          \n\t cd src && make start \n\n
+          \n\t STEP 2 Open a new terminal and make sure you are in the directory ./src 📌 \n
+          \n\t make -f Makefile.{{layerName | trim}} call-{{layerName | trim}} \n\n'
